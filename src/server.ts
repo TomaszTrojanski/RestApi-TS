@@ -3,6 +3,7 @@ import http from 'http';
 import mongoose from 'mongoose';
 import { config } from './config/config';
 import Logging from './library/logging';
+import caliberRoutes from './routes/caliber';
 
 const router = express();
 // Connect to Mongo
@@ -48,6 +49,8 @@ const StartServer = () => {
     });
 
     //Routes
+
+    router.use('/caliber', caliberRoutes);
 
     //Healthcheck
     router.get('/ping', (req, res, next) => res.status(200).json({ message: 'pong' }));

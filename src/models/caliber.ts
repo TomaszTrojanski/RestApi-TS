@@ -4,7 +4,7 @@ export interface ICaliber {
     caliber: string;
 }
 
-export interface IcaliberModel extends ICaliber, Document {}
+export interface ICaliberModel extends ICaliber, Document {}
 
 const CaliberSchema: Schema = new Schema(
     {
@@ -15,4 +15,4 @@ const CaliberSchema: Schema = new Schema(
     }
 );
 
-export default mongoose.model<IcaliberModel>('Caliber', CaliberSchema);
+export default mongoose.model<ICaliberModel>('Caliber', CaliberSchema);

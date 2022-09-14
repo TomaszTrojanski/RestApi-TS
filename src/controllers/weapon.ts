@@ -47,7 +47,7 @@ const upeateWeapon = (req: Request, res: Response, next: NextFunction) => {
 const deleteWeapon = (req: Request, res: Response, next: NextFunction) => {
     const weaponID = req.params.weaponID;
 
-    return Ammo.findByIdAndDelete(weaponID)
+    return Weapon.findByIdAndDelete(weaponID)
         .then((weapon) => (weapon ? res.status(201).json({ weapon, message: 'Deleted' }) : res.status(404).json({ message: 'not found' })))
         .catch((error) => res.status(500).json({ error }));
 };
