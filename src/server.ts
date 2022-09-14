@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 import { config } from './config/config';
 import Logging from './library/logging';
 import caliberRoutes from './routes/caliber';
+import ammoRoutes from './routes/ammo';
+import weaponRoutes from './routes/weapon';
 
 const router = express();
 // Connect to Mongo
@@ -51,6 +53,8 @@ const StartServer = () => {
     //Routes
 
     router.use('/caliber', caliberRoutes);
+    router.use('/ammo', ammoRoutes);
+    router.use('/weapon', weaponRoutes);
 
     //Healthcheck
     router.get('/ping', (req, res, next) => res.status(200).json({ message: 'pong' }));

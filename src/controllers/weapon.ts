@@ -6,7 +6,8 @@ const createWeapon = (req: Request, res: Response, next: NextFunction) => {
     const { name, caliber } = req.body;
     const weapon = new Weapon({
         _id: new mongoose.Types.ObjectId(),
-        name
+        name,
+        caliber
     });
 
     return weapon
@@ -18,15 +19,19 @@ const readWeapon = (req: Request, res: Response, next: NextFunction) => {
     const weaponID = req.params.weaponID;
 
     return Weapon.findById(weaponID)
+        .populate('caliber')
+        .select('-__v')
         .then((weapon) => (weapon ? res.status(200).json({ weapon }) : res.status(404).json({ message: 'not found' })))
         .catch((error) => res.status(500).json({ error }));
 };
 const readAll = (req: Request, res: Response, next: NextFunction) => {
     return Weapon.find()
+        .populate('caliber')
+        .select('-__v')
         .then((weapon) => res.status(200).json({ weapon }))
         .catch((error) => res.status(500).json({ error }));
 };
-const upeateWeapon = (req: Request, res: Response, next: NextFunction) => {
+const updateWeapon = (req: Request, res: Response, next: NextFunction) => {
     const weaponID = req.params.weaponID;
 
     return Weapon.findById(weaponID)
@@ -52,4 +57,4 @@ const deleteWeapon = (req: Request, res: Response, next: NextFunction) => {
         .catch((error) => res.status(500).json({ error }));
 };
 
-export default { createWeapon, readWeapon, readAll, upeateWeapon, deleteWeapon };
+export default { createWeapon, readWeapon, readAll, updateWeapon, deleteWeapon };

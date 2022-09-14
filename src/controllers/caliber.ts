@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import caliber from '../models/caliber';
 import Caliber from '../models/caliber';
 
 const createCaliber = (req: Request, res: Response, next: NextFunction) => {

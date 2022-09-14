@@ -6,7 +6,8 @@ const createAmmo = (req: Request, res: Response, next: NextFunction) => {
     const { name, caliber } = req.body;
     const ammo = new Ammo({
         _id: new mongoose.Types.ObjectId(),
-        name
+        name,
+        caliber
     });
 
     return ammo
@@ -18,11 +19,15 @@ const readAmmo = (req: Request, res: Response, next: NextFunction) => {
     const ammoID = req.params.ammoID;
 
     return Ammo.findById(ammoID)
+        .populate('caliber')
+        .select('-__v')
         .then((ammo) => (ammo ? res.status(200).json({ ammo }) : res.status(404).json({ message: 'not found' })))
         .catch((error) => res.status(500).json({ error }));
 };
 const readAll = (req: Request, res: Response, next: NextFunction) => {
     return Ammo.find()
+        .populate('caliber')
+        .select('-__v')
         .then((ammo) => res.status(200).json({ ammo }))
         .catch((error) => res.status(500).json({ error }));
 };

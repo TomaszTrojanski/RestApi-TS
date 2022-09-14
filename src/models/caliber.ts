@@ -1,14 +1,14 @@
 import mongoose, { Document, Schema } from 'mongoose';
 
 export interface ICaliber {
-    caliber: string;
+    name: string;
 }
 
 export interface ICaliberModel extends ICaliber, Document {}
 
 const CaliberSchema: Schema = new Schema(
     {
-        caliber: { type: String, require: true }
+        name: { type: String, require: true }
     },
     {
         versionKey: false
